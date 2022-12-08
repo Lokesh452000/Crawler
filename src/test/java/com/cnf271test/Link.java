@@ -19,24 +19,25 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Link {
     public static void main(String[] args) throws IOException, InterruptedException {
+        
+    WebDriverManager.chromedriver().setup();
+		WebDriver driver = new ChromeDriver();
 
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.suneratech.com/");
 
-        driver.manage().window().maximize();
-        driver.get("https://www.suneratech.com/");
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        String currentUrl = driver.getCurrentUrl();
-        System.out.println("current_url :"+currentUrl);
-
-        String pageSource = driver.getPageSource();
-        System.out.println("html : "+pageSource);
-        TakesScreenshot scr = (TakesScreenshot) driver;
-        String base64 = scr.getScreenshotAs(OutputType.BASE64);
-        System.out.println("base64_image : "+base64);
-
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		String seedUrl = driver.getCurrentUrl();
+		System.out.println("seed_url :" + seedUrl);
+		WebElement findElement = driver.findElement(By.xpath("(//span[text()='Platforms'])[1]"));
+		findElement.click();
+		String Currenturl = driver.getCurrentUrl();
+		System.out.println("Currenturl :" + Currenturl);
+		String pageSource = driver.getPageSource();
+		System.out.println("html : " + pageSource);
+		TakesScreenshot scr = (TakesScreenshot) driver;
+		String base64 = scr.getScreenshotAs(OutputType.BASE64);
+		System.out.println("base64_image : " + base64);
 
     }
 
